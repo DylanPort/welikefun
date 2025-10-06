@@ -988,9 +988,6 @@ class TikTokFeed {
                                     <button class="iframe-btn refresh-btn" title="Refresh">
                                         <i class="fas fa-sync-alt"></i>
                                     </button>
-                                    <button class="iframe-btn fullscreen-btn" title="Fullscreen">
-                                        <i class="fas fa-expand"></i>
-                                    </button>
                                 </div>
                                 <div class="iframe-url">${website.url}</div>
                             </div>
@@ -1792,7 +1789,6 @@ class TikTokFeed {
 
     setupIframeControls(card, website) {
         const refreshBtn = card.querySelector('.refresh-btn');
-        const fullscreenBtn = card.querySelector('.fullscreen-btn');
         const iframe = card.querySelector('iframe');
         
         // Refresh iframe
@@ -1807,11 +1803,6 @@ class TikTokFeed {
             iframe.src = iframe.src; // Reload iframe
         });
         
-        // Fullscreen iframe
-        fullscreenBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            this.openWebsite(website);
-        });
         
         // Start loading progress when iframe loads
         this.startLoadingProgress(card);
