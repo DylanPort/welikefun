@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun Websites - TikTok Style</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=ProximaNova:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="tiktok-app">
+        <!-- Top Header with Logo -->
+        <header class="top-header">
+            <div class="header-logo">
+                <img src="logo.png" alt="Logo" class="header-logo-image">
+            </div>
+            <div class="scrolling-banner">
+                <div class="scrolling-text">
+                    Support this project by buying our native token $WELIKEFUN
+                </div>
+            </div>
+        </header>
+        
+        <!-- TikTok Bottom Navigation -->
+        <nav class="bottom-nav">
+            <div class="nav-item active" data-section="home">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </div>
+            <div class="nav-item" data-section="discover">
+                <i class="fas fa-search"></i>
+                <span>Discover</span>
+            </div>
+            <div class="nav-item" data-section="upload">
+                <i class="fas fa-plus"></i>
+            </div>
+            <div class="nav-item" data-section="profile">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </div>
+        </nav>
+
+        <!-- Main Feed Container -->
+        <div class="feed-container" id="feedContainer">
+            <div class="video-feed" id="videoFeed">
+                <!-- Video cards will be dynamically generated here -->
+            </div>
+            
+            <!-- Scroll Progress Indicator -->
+            <div class="scroll-progress" id="scrollProgress">
+                <div class="progress-bar"></div>
+                <div class="progress-dots">
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+            
+            <!-- Scroll Direction Indicator -->
+            <div class="scroll-indicator" id="scrollIndicator">
+                <div class="scroll-arrow up">
+                    <i class="fas fa-chevron-up"></i>
+                </div>
+                <div class="scroll-arrow down">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+            
+            <!-- Scroll Velocity Indicator -->
+            <div class="velocity-indicator" id="velocityIndicator">
+                <div class="velocity-bar"></div>
+            </div>
+        </div>
+
+        <!-- Discover Section -->
+        <div class="section discover-section" id="discoverSection" style="display: none;">
+            <div class="section-header">
+                <h2>Discover Fun Websites</h2>
+                <p>Explore trending and popular .fun websites</p>
+            </div>
+            <div class="discover-grid" id="discoverGrid">
+                <!-- Discover content will be dynamically generated here -->
+            </div>
+        </div>
+
+        <!-- Upload Section -->
+        <div class="section upload-section" id="uploadSection" style="display: none;">
+            <div class="section-header">
+                <h2>Upload Your .fun Website</h2>
+                <p>Share your creative .fun website with the community</p>
+            </div>
+            <div class="upload-form">
+                <div class="form-group">
+                    <label for="websiteTitle">Website Title</label>
+                    <input type="text" id="websiteTitle" placeholder="Enter your website title">
+                </div>
+                <div class="form-group">
+                    <label for="websiteUrl">Website URL</label>
+                    <input type="url" id="websiteUrl" placeholder="https://yourwebsite.fun">
+                </div>
+                <div class="form-group">
+                    <label for="websiteDescription">Description</label>
+                    <textarea id="websiteDescription" placeholder="Describe your website..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="websiteTags">Tags (comma separated)</label>
+                    <input type="text" id="websiteTags" placeholder="fun, creative, interactive">
+                </div>
+                <button class="upload-btn" id="uploadBtn">
+                    <i class="fas fa-upload"></i>
+                    Upload Website
+                </button>
+            </div>
+        </div>
+
+        <!-- Profile Section -->
+        <div class="section profile-section" id="profileSection" style="display: none;">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <img src="logo.png" alt="Profile" class="profile-avatar-img">
+                </div>
+                <div class="profile-info">
+                    <h2 id="profileName">Guest User</h2>
+                    <p id="profileEmail">Not signed in</p>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <span class="number" id="likesCount">0</span>
+                            <span class="label">Likes</span>
+                        </div>
+                        <div class="stat">
+                            <span class="number" id="commentsCount">0</span>
+                            <span class="label">Comments</span>
+                        </div>
+                        <div class="stat">
+                            <span class="number" id="bookmarksCount">0</span>
+                            <span class="label">Bookmarks</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-content">
+                <div class="profile-tabs">
+                    <button class="tab-btn active" data-tab="liked">Liked</button>
+                    <button class="tab-btn" data-tab="bookmarked">Bookmarked</button>
+                    <button class="tab-btn" data-tab="uploaded">Uploaded</button>
+                </div>
+                <div class="profile-grid" id="profileGrid">
+                    <div class="empty-profile">
+                        <div class="empty-icon">📝</div>
+                        <h3>Your Profile is Empty</h3>
+                        <p>Start liking websites and adding comments to build your profile!</p>
+                        <button class="start-exploring-btn" onclick="document.querySelector('[data-section=\'home\']').click()">
+                            Start Exploring
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Panel Removed - Now using individual reel buttons -->
+
+        <!-- Website Preview Overlay -->
+        <div class="website-overlay" id="websiteOverlay">
+            <div class="overlay-header">
+                <button class="back-btn" id="backBtn">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h3 class="website-title">Website Preview</h3>
+                <button class="external-btn" id="externalBtn">
+                    <i class="fas fa-external-link-alt"></i>
+                </button>
+            </div>
+            <div class="website-frame-container">
+                <iframe id="websiteFrame" src="" frameborder="0"></iframe>
+            </div>
+        </div>
+
+        <!-- Login Modal -->
+        <div class="login-modal" id="loginModal" style="display: none;">
+            <div class="login-modal-content">
+                <div class="login-header">
+                    <h3>Welcome to WeLike.fun</h3>
+                    <button class="login-close" id="loginClose">&times;</button>
+                </div>
+                <div class="login-body">
+                    <p>Sign in to like, comment, and access your profile</p>
+                    <form class="login-form" id="loginForm">
+                        <div class="form-group">
+                            <label for="userEmail">Email Address</label>
+                            <input type="email" id="userEmail" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="userName">Display Name</label>
+                            <input type="text" id="userName" placeholder="Enter your name" required>
+                        </div>
+                        <button type="submit" class="login-submit">Sign In</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Screen -->
+        <div class="loading-screen" id="loadingScreen">
+            <div class="tiktok-logo">
+                <img src="logo.png" alt="Logo" class="logo-image">
+            </div>
+            <div class="loading-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Supabase Configuration -->
+    <script>
+        // Replace with your actual Supabase project URL and anon key
+        const SUPABASE_URL = 'https://your-project.supabase.co';
+        const SUPABASE_ANON_KEY = 'your-anon-key';
+        
+        // Initialize Supabase client
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    </script>
+    
+    <script src="supabase-service.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
