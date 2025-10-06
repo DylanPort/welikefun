@@ -943,7 +943,9 @@ class TikTokFeed {
                         <div class="website-favicon ${website.category}-icon">
                             <div class="animated-icon" data-category="${website.category}" data-theme="${website.theme}">
                                 <img src="${this.getFaviconUrl(website.url)}" alt="${website.title}" class="real-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <div class="favicon-fallback" style="display: none;">${website.favicon}</div>
+                                <div class="favicon-fallback" style="display: none;">
+                                    <img src="logo/ChatGPT Image Oct 6, 2025, 10_23_23 PM.png" alt="WeLike.fun Logo" class="animated-logo-fallback">
+                                </div>
                                 ${this.createAnimatedEffects(website)}
                             </div>
                         </div>
@@ -1959,7 +1961,9 @@ class TikTokFeed {
                 <div class="comment-modal-body">
                     <div class="comment-website-info">
                         <img src="${this.getFaviconUrl(website.url)}" alt="${website.title}" class="comment-website-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="comment-website-fallback" style="display: none;">${website.favicon}</div>
+                        <div class="comment-website-fallback" style="display: none;">
+                            <img src="logo/ChatGPT Image Oct 6, 2025, 10_23_23 PM.png" alt="WeLike.fun Logo" class="animated-logo-fallback">
+                        </div>
                         <div class="comment-website-details">
                             <h4>${website.title}</h4>
                             <p>${website.description}</p>
@@ -2314,7 +2318,9 @@ class TikTokFeed {
                 <div class="discover-card-image">
                     <div class="discover-favicon">
                         <img src="${this.getFaviconUrl(website.url)}" alt="${website.title}" class="discover-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="discover-fallback" style="display: none;">${website.favicon}</div>
+                        <div class="discover-fallback" style="display: none;">
+                            <img src="logo/ChatGPT Image Oct 6, 2025, 10_23_23 PM.png" alt="WeLike.fun Logo" class="animated-logo-fallback">
+                        </div>
                     </div>
                     ${this.createAnimatedEffects(website)}
                 </div>
