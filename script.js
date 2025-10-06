@@ -983,14 +983,6 @@ class TikTokFeed {
                         </div>
                         
                         <div class="iframe-preview">
-                            <div class="iframe-header">
-                                <div class="iframe-controls">
-                                    <button class="iframe-btn refresh-btn" title="Refresh">
-                                        <i class="fas fa-sync-alt"></i>
-                                    </button>
-                                </div>
-                                <div class="iframe-url">${website.url}</div>
-                            </div>
                             <div class="iframe-container">
                                 <iframe 
                                     src="${website.url}" 
@@ -1042,8 +1034,6 @@ class TikTokFeed {
         console.log('TikTok actions div:', card.querySelector('.tiktok-actions'));
         this.setupReelActionButtons(card, website);
         
-        // Add iframe control events
-        this.setupIframeControls(card, website);
         
         // Add unique animations based on category
         this.addCategoryAnimations(card, website);
@@ -1787,26 +1777,6 @@ class TikTokFeed {
         });
     }
 
-    setupIframeControls(card, website) {
-        const refreshBtn = card.querySelector('.refresh-btn');
-        const iframe = card.querySelector('iframe');
-        
-        // Refresh iframe
-        refreshBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const loading = card.querySelector('.iframe-loading');
-            const error = card.querySelector('.iframe-error');
-            
-            loading.style.display = 'flex';
-            error.style.display = 'none';
-            this.startLoadingProgress(card);
-            iframe.src = iframe.src; // Reload iframe
-        });
-        
-        
-        // Start loading progress when iframe loads
-        this.startLoadingProgress(card);
-    }
     
     startLoadingProgress(card) {
         const loading = card.querySelector('.iframe-loading');
