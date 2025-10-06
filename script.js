@@ -1011,8 +1011,8 @@ class TikTokFeed {
                                     </div>
                                 </div>
                                 <div class="iframe-error" style="display: none;">
-                                    <i class="fas fa-exclamation-triangle"></i>
-                                    <span>Preview unavailable</span>
+                                    <i class="fas fa-external-link-alt"></i>
+                                    <span>Website can be viewed with the external link</span>
                                 </div>
                             </div>
                         </div>
