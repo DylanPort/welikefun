@@ -4054,7 +4054,10 @@ body {
         #bfdbfe 100%    /* Very light blue bottom */
     );
     min-height: 200vh;
-    overflow: visible;
+    overflow-y: auto !important;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
     will-change: transform;
     contain: layout paint;
 }
@@ -4096,6 +4099,7 @@ body {
     padding: 20px 0;
     position: relative;
     z-index: 100;
+    pointer-events: auto;
 }
 
 .discover-section .section-header {
