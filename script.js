@@ -1210,7 +1210,8 @@ class TikTokFeed {
                 <div class="logo-background">
                     <img src="${this.getFaviconUrl(website.url)}" alt="${website.title}" class="background-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="background-fallback" style="display: none;">
-                        <img src="logo/ChatGPT Image Oct 6, 2025, 10_23_23 PM.png" alt="WeLike.fun Logo" class="animated-logo-fallback">
+                        <img src="${this.getAltFaviconUrl(website.url)}" alt="${website.title} Favicon" class="alt-favicon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="favicon-letter" style="display: none;">${this.getDomainInitial(website.url)}</div>
                 </div>
                 </div>
                 <div class="content-overlay">
@@ -1229,7 +1230,8 @@ class TikTokFeed {
                             <div class="preview-media">
                                 <img class="preview-screenshot" src="${this.getScreenshotUrl(website.url)}" alt="${website.title}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                 <div class="preview-fallback" style="display: none;">
-                                    <img src="logo/ChatGPT Image Oct 6, 2025, 10_23_23 PM.png" alt="WeLike.fun Logo" class="animated-logo-fallback">
+                                    <img src="${this.getAltFaviconUrl(website.url)}" alt="${website.title} Favicon" class="alt-favicon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                    <div class="favicon-letter" style="display: none;">${this.getDomainInitial(website.url)}</div>
                                 </div>
                                 <div class="preview-glow"></div>
                             </div>
@@ -1327,6 +1329,25 @@ class TikTokFeed {
         } catch (error) {
             // Fallback to a generic favicon service
             return `https://favicons.githubusercontent.com/${url}`;
+        }
+    }
+
+    getAltFaviconUrl(url) {
+        try {
+            const domain = new URL(url).hostname;
+            // Alternative favicon provider
+            return `https://icons.duckduckgo.com/ip3/${domain}.ico`;
+        } catch (e) {
+            return '';
+        }
+    }
+
+    getDomainInitial(url) {
+        try {
+            const domain = new URL(url).hostname.replace('www.', '');
+            return domain.charAt(0).toUpperCase();
+        } catch (e) {
+            return '?';
         }
     }
 
@@ -1982,7 +2003,8 @@ class TikTokFeed {
                     <div class="comment-website-info">
                         <img src="${this.getFaviconUrl(website.url)}" alt="${website.title}" class="comment-website-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         <div class="comment-website-fallback" style="display: none;">
-                            <img src="logo/ChatGPT Image Oct 6, 2025, 10_23_23 PM.png" alt="WeLike.fun Logo" class="animated-logo-fallback">
+                            <img src="${this.getAltFaviconUrl(website.url)}" alt="${website.title} Favicon" class="alt-favicon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="favicon-letter" style="display: none;">${this.getDomainInitial(website.url)}</div>
                         </div>
                         <div class="comment-website-details">
                             <h4>${website.title}</h4>
@@ -2406,7 +2428,8 @@ class TikTokFeed {
                     <div class="discover-favicon">
                         <img src="${this.getFaviconUrl(website.url)}" alt="${website.title}" class="discover-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         <div class="discover-fallback" style="display: none;">
-                            <img src="logo/ChatGPT Image Oct 6, 2025, 10_23_23 PM.png" alt="WeLike.fun Logo" class="animated-logo-fallback">
+                            <img src="${this.getAltFaviconUrl(website.url)}" alt="${website.title} Favicon" class="alt-favicon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="favicon-letter" style="display: none;">${this.getDomainInitial(website.url)}</div>
                     </div>
                     </div>
                 </div>
