@@ -1225,6 +1225,20 @@ class TikTokFeed {
                     </div>
                     
                     <div class="right-content">
+                        <div class="preview-card" data-url="${website.url}">
+                            <div class="preview-media">
+                                <img class="preview-screenshot" src="${this.getScreenshotUrl(website.url)}" alt="${website.title}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="preview-fallback" style="display: none;">
+                                    <img src="logo/ChatGPT Image Oct 6, 2025, 10_23_23 PM.png" alt="WeLike.fun Logo" class="animated-logo-fallback">
+                                </div>
+                                <div class="preview-glow"></div>
+                            </div>
+                            <div class="preview-meta">
+                                <span class="preview-title">${website.title}</span>
+                                <span class="preview-chip">${this.getCleanUrl(website.url)}</span>
+                            </div>
+                        </div>
+
                         <!-- TikTok-style Action Buttons -->
                         <div class="tiktok-actions">
                             <div class="action-item">
@@ -1251,43 +1265,7 @@ class TikTokFeed {
                                 </button>
                             </div>
                         </div>
-                        
-                        <div class="iframe-preview">
-                            <div class="iframe-container">
-                                <iframe 
-                                    src="${website.url}" 
-                                    frameborder="0"
-                                    loading="lazy"
-                                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                                    onload="this.parentElement.querySelector('.iframe-loading').style.display='none'"
-                                    onerror="this.parentElement.querySelector('.iframe-error').style.display='flex'">
-                                </iframe>
-                                <div class="iframe-loading">
-                                    <div class="loading-container">
-                                        <div class="loading-spinner">
-                                            <div class="loading-progress-ring"></div>
-                                        </div>
-                                        <div class="loading-progress-bar">
-                                            <div class="loading-progress-fill"></div>
-                                        </div>
-                                        <div class="loading-text">Loading preview</div>
-                                        <div class="loading-percentage">0%</div>
-                                        <div class="loading-dots">
-                                            <div class="loading-dot"></div>
-                                            <div class="loading-dot"></div>
-                                            <div class="loading-dot"></div>
-                                        </div>
-                                        <div class="loading-status">Connecting to website...</div>
-                                    </div>
                                 </div>
-                                <div class="iframe-error" style="display: none;">
-                                        <i class="fas fa-external-link-alt"></i>
-                                        <span>Website can be viewed with the external link</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         `;
@@ -1299,6 +1277,22 @@ class TikTokFeed {
                 this.openWebsite(website);
             }
         });
+
+        // Interactive preview card hover glow (tracks mouse position)
+        const previewCard = card.querySelector('.preview-card');
+        if (previewCard) {
+            previewCard.addEventListener('mousemove', (ev) => {
+                const rect = previewCard.getBoundingClientRect();
+                const mx = ((ev.clientX - rect.left) / rect.width) * 100 + '%';
+                const my = ((ev.clientY - rect.top) / rect.height) * 100 + '%';
+                previewCard.style.setProperty('--mx', mx);
+                previewCard.style.setProperty('--my', my);
+            });
+            previewCard.addEventListener('mouseleave', () => {
+                previewCard.style.removeProperty('--mx');
+                previewCard.style.removeProperty('--my');
+            });
+        }
 
         // Add event listeners to individual reel action buttons
         console.log('Card created for:', website.title);
@@ -1333,6 +1327,17 @@ class TikTokFeed {
         } catch (error) {
             // Fallback to a generic favicon service
             return `https://favicons.githubusercontent.com/${url}`;
+        }
+    }
+
+    getScreenshotUrl(url) {
+        try {
+            const encoded = encodeURIComponent(url);
+            // Use thum.io unauthenticated demo endpoint as a lightweight static thumbnail
+            // Note: replace with your own screenshot service if rate limits are hit
+            return `https://image.thum.io/get/width/800/crop/800/noanimate/${encoded}`;
+        } catch (e) {
+            return '';
         }
     }
 
