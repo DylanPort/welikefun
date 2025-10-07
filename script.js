@@ -1206,7 +1206,13 @@ class TikTokFeed {
         if (website.trending) card.classList.add('trending');
         
         card.innerHTML = `
-            <div class="video-content" style="background-image: url('${this.getFaviconUrl(website.url)}'), url('logo/ChatGPT Image Oct 6, 2025, 10_23_23 PM.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+            <div class="video-content">
+                <div class="logo-background">
+                    <img src="${this.getFaviconUrl(website.url)}" alt="${website.title}" class="background-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="background-fallback" style="display: none;">
+                        <img src="logo/ChatGPT Image Oct 6, 2025, 10_23_23 PM.png" alt="WeLike.fun Logo" class="animated-logo-fallback">
+                    </div>
+                </div>
                 <div class="content-overlay">
                     <div class="content-layout">
                         <div class="left-content">
