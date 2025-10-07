@@ -379,7 +379,6 @@ body {
     border-radius: 16px;
     overflow: hidden;
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     position: relative;
     z-index: 10;
@@ -1314,7 +1313,6 @@ body {
     font-size: 12px;
     font-weight: 500;
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Theme-based styling */
