@@ -398,7 +398,7 @@ body {
 .iframe-container {
     position: relative;
     width: 100%;
-    height: 300px;
+    height: 450px;
     background: #fff;
     overflow: hidden;
 }
@@ -610,8 +610,8 @@ body {
     }
     
     .iframe-container {
-        height: 200px;
-        min-height: 180px;
+        height: 300px;
+        min-height: 280px;
     }
     
     .iframe-container iframe {
@@ -623,7 +623,7 @@ body {
     /* Ensure loading animation fits in mobile iframe */
     .iframe-loading {
         padding: 10px;
-        min-height: 180px;
+        min-height: 280px;
     }
     
     .website-favicon {
@@ -711,8 +711,8 @@ body {
     }
     
     .iframe-container {
-        height: 180px;
-        min-height: 160px;
+        height: 250px;
+        min-height: 230px;
     }
     
     .iframe-container iframe {
@@ -724,7 +724,7 @@ body {
     /* Ensure loading animation fits in extra small mobile iframe */
     .iframe-loading {
         padding: 8px;
-        min-height: 160px;
+        min-height: 230px;
     }
     
     .iframe-header {
