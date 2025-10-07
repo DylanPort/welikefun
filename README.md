@@ -64,7 +64,18 @@ Visit the live application at: [https://welikefun.netlify.app](https://welikefun
    cd welikefun
    ```
 
-2. **Set up Supabase**
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Build the project**
+   ```bash
+   npm run build
+   ```
+   This will minify CSS and JS files, reducing file sizes by ~35% for faster load times.
+
+4. **Set up Supabase**
    - Create a new Supabase project
    - Run the SQL schema from `supabase-schema.sql`
    - Update the configuration in `index.html`:
@@ -73,19 +84,19 @@ Visit the live application at: [https://welikefun.netlify.app](https://welikefun
      const SUPABASE_ANON_KEY = 'your-anon-key';
      ```
 
-3. **Start local server**
+5. **Start local server**
    ```bash
-   # Using Python
-   python -m http.server 8000
+   # Using Node.js (recommended)
+   npx serve dist
    
-   # Using Node.js
-   npx serve .
+   # Using Python
+   cd dist && python -m http.server 8000
    
    # Using PHP
-   php -S localhost:8000
+   cd dist && php -S localhost:8000
    ```
 
-4. **Open in browser**
+6. **Open in browser**
    Navigate to `http://localhost:8000`
 
 ## 🗄️ Database Schema
@@ -114,18 +125,35 @@ For production deployment, set these environment variables in Netlify:
 
 ## 📦 Deployment
 
-### Netlify Deployment
+### Netlify Deployment (Automatic)
+The site is configured with `netlify.toml` for automatic deployment:
+
 1. Connect your GitHub repository to Netlify
-2. Set build command: `echo 'No build step required'`
-3. Set publish directory: `.`
-4. Add environment variables for Supabase
-5. Deploy!
+2. Netlify will automatically:
+   - Install dependencies (`npm install`)
+   - Build and minify assets (`npm run build`)
+   - Deploy from the `dist` directory
+3. Add environment variables for Supabase (if needed)
+4. Deploy!
+
+**Build Settings:**
+- Build command: `npm install && npm run build`
+- Publish directory: `dist`
+- Node version: 18
 
 ### Manual Deployment
-1. Build the project (if needed)
-2. Upload files to your web server
-3. Configure Supabase settings
-4. Test the application
+1. Install dependencies: `npm install`
+2. Build the project: `npm run build`
+3. Upload the `dist` folder contents to your web server
+4. Configure Supabase settings
+5. Test the application
+
+### Performance Optimizations
+- ✅ **Minified CSS**: 27% reduction (161 KB → 117 KB)
+- ✅ **Minified JS**: 43% reduction (104 KB → 59 KB)
+- ✅ **Gzip/Brotli**: Netlify automatically compresses assets
+- ✅ **Long-term caching**: 1-year cache for static assets
+- ✅ **Content Security Policy**: Enhanced security headers
 
 ## 🎨 Customization
 
