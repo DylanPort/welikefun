@@ -1213,36 +1213,46 @@ class TikTokFeed {
                         <img src="${this.getAltFaviconUrl(website.url)}" alt="${website.title} Favicon" class="alt-favicon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         <div class="favicon-letter" style="display: none;">${this.getDomainInitial(website.url)}</div>
                 </div>
-                </div>
-                <div class="content-overlay">
-                <div class="content-layout">
-                    <div class="left-content">
-                            <div class="website-link">
-                                <button class="website-url-btn" onclick="this.closest('.video-card').click()">${this.getCleanUrl(website.url)}</button>
                             </div>
-                            <div class="website-description">
-                                <p>${website.description}</p>
+                <div class="content-overlay">
+                    <div class="reel-card" data-url="${website.url}">
+                        <div class="rc-media">
+                            <img class="rc-shot" src="${this.getScreenshotUrl(website.url)}" alt="${website.title}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="rc-fallback" style="display:none;">
+                                <img src="${this.getAltFaviconUrl(website.url)}" alt="${website.title} Favicon" class="alt-favicon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="favicon-letter" style="display:none;">${this.getDomainInitial(website.url)}</div>
+                        </div>
+                            <div class="rc-bubbles">
+                                <span class="bubble b1"></span>
+                                <span class="bubble b2"></span>
+                                <span class="bubble b3"></span>
+                                <span class="bubble b4"></span>
+                                <span class="bubble b5"></span>
+                            </div>
+                            <div class="rc-glow"></div>
+                        </div>
+                        <div class="rc-top">
+                            <div class="rc-badges">
+                                ${website.trending ? '<span class="badge hot">🔥 Trending</span>' : ''}
+                                <span class="badge cat">${website.category || 'fun'}</span>
+                            </div>
+                            <img class="rc-favicon" src="${this.getFaviconUrl(website.url)}" alt="${website.title}" onerror="this.style.display='none'">
+                        </div>
+                        <div class="rc-bottom">
+                            <h3 class="rc-title">${website.title}</h3>
+                            <p class="rc-desc">${website.description}</p>
+                            <div class="rc-xp">
+                                <div class="bar"><span style="width:${this.getXpPercent(website)}%"></span></div>
+                                <div class="xp-label">Level ${this.getXpLevel(website)}</div>
+                            </div>
+                            <div class="rc-cta-row">
+                                <button class="website-url-btn rc-cta" onclick="this.closest('.video-card').click()">Open</button>
+                                <span class="rc-chip">${this.getCleanUrl(website.url)}</span>
                         </div>
                     </div>
                     
-                    <div class="right-content">
-                        <div class="preview-card" data-url="${website.url}">
-                            <div class="preview-media">
-                                <img class="preview-screenshot" src="${this.getScreenshotUrl(website.url)}" alt="${website.title}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <div class="preview-fallback" style="display: none;">
-                                    <img src="${this.getAltFaviconUrl(website.url)}" alt="${website.title} Favicon" class="alt-favicon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                    <div class="favicon-letter" style="display: none;">${this.getDomainInitial(website.url)}</div>
-                                </div>
-                                <div class="preview-glow"></div>
-                            </div>
-                            <div class="preview-meta">
-                                <span class="preview-title">${website.title}</span>
-                                <span class="preview-chip">${this.getCleanUrl(website.url)}</span>
-                            </div>
-                        </div>
-
-                        <!-- TikTok-style Action Buttons -->
-                        <div class="tiktok-actions">
+                        <!-- Actions -->
+                        <div class="tiktok-actions rc-actions">
                             <div class="action-item">
                                 <button class="tiktok-action-btn like-btn" data-website-url="${website.url}">
                                     <img src="logo.png" alt="Like" class="like-logo">
@@ -1267,7 +1277,6 @@ class TikTokFeed {
                                 </button>
                             </div>
                         </div>
-                                </div>
                 </div>
             </div>
         `;
@@ -1293,6 +1302,21 @@ class TikTokFeed {
             previewCard.addEventListener('mouseleave', () => {
                 previewCard.style.removeProperty('--mx');
                 previewCard.style.removeProperty('--my');
+            });
+        }
+
+        const reelCard = card.querySelector('.reel-card');
+        if (reelCard) {
+            reelCard.addEventListener('mousemove', (ev) => {
+                const rect = reelCard.getBoundingClientRect();
+                const mx = ((ev.clientX - rect.left) / rect.width) * 100 + '%';
+                const my = ((ev.clientY - rect.top) / rect.height) * 100 + '%';
+                reelCard.style.setProperty('--mx', mx);
+                reelCard.style.setProperty('--my', my);
+            });
+            reelCard.addEventListener('mouseleave', () => {
+                reelCard.style.removeProperty('--mx');
+                reelCard.style.removeProperty('--my');
             });
         }
 
@@ -1356,7 +1380,7 @@ class TikTokFeed {
             const encoded = encodeURIComponent(url);
             // Use thum.io unauthenticated demo endpoint as a lightweight static thumbnail
             // Note: replace with your own screenshot service if rate limits are hit
-            return `https://image.thum.io/get/width/800/crop/800/noanimate/${encoded}`;
+            return `https://image.thum.io/get/width/1200/crop/900/noanimate/${encoded}`;
         } catch (e) {
             return '';
         }
@@ -1369,6 +1393,18 @@ class TikTokFeed {
         } catch (error) {
             return url.replace(/^https?:\/\//, '').replace(/^www\./, '');
         }
+    }
+
+    // Gamified XP helpers based on engagement
+    getXpPercent(website) {
+        const max = Math.max(1, (website.engagement.views || 0) + (website.engagement.likes || 0) * 5 + (website.engagement.shares || 0) * 8);
+        const base = Math.min(100, Math.round((website.engagement.likes * 5 + website.engagement.shares * 8) / max * 100));
+        return isNaN(base) ? 10 : Math.max(10, base);
+    }
+
+    getXpLevel(website) {
+        const score = (website.engagement.likes || 0) * 2 + (website.engagement.comments || 0) + (website.engagement.shares || 0) * 3;
+        return Math.max(1, Math.floor(Math.log10(score + 10)) + 1);
     }
 
 
