@@ -348,6 +348,8 @@ body {
 /* Website Description */
 .website-description {
     max-width: 400px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .website-description p {
@@ -356,6 +358,8 @@ body {
     line-height: 1.5;
     margin: 0;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .right-content {
@@ -605,6 +609,7 @@ body {
         justify-content: flex-start;
         align-items: center;
         padding-top: 20px;
+        padding-bottom: 30px;
     }
     
     .content-layout {
@@ -624,6 +629,7 @@ body {
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin-bottom: 20px;
     }
     
     .right-content {

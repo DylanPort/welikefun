@@ -1211,76 +1211,76 @@ class TikTokFeed {
                     <img src="${this.getFaviconUrl(website.url)}" alt="${website.title}" class="background-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="background-fallback" style="display: none;">
                         <img src="logo/ChatGPT Image Oct 6, 2025, 10_23_23 PM.png" alt="WeLike.fun Logo" class="animated-logo-fallback">
-                    </div>
+                </div>
                 </div>
                 <div class="content-overlay">
-                    <div class="content-layout">
-                        <div class="left-content">
+                <div class="content-layout">
+                    <div class="left-content">
                             <div class="website-link">
                                 <a href="${website.url}" target="_blank" class="website-url-btn">${this.getCleanUrl(website.url)}</a>
                             </div>
                             <div class="website-description">
                                 <p>${website.description}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="right-content">
+                        <!-- TikTok-style Action Buttons -->
+                        <div class="tiktok-actions">
+                            <div class="action-item">
+                                <button class="tiktok-action-btn like-btn" data-website-url="${website.url}">
+                                    <img src="logo.png" alt="Like" class="like-logo">
+                                    <span class="count">${this.formatNumber(website.engagement.likes)}</span>
+                                </button>
+                            </div>
+                            <div class="action-item">
+                                <button class="tiktok-action-btn comment-btn" data-website-url="${website.url}">
+                                    <i class="far fa-comment"></i>
+                                    <span class="count">${this.formatNumber(website.engagement.comments)}</span>
+                                </button>
+                            </div>
+                            <div class="action-item">
+                                <button class="tiktok-action-btn share-btn" data-website-url="${website.url}">
+                                    <i class="fas fa-share"></i>
+                                    <span class="count">${this.formatNumber(website.engagement.shares)}</span>
+                                </button>
+                            </div>
+                            <div class="action-item">
+                                <button class="tiktok-action-btn bookmark-btn" data-website-url="${website.url}">
+                                    <i class="far fa-bookmark"></i>
+                                </button>
                             </div>
                         </div>
                         
-                        <div class="right-content">
-                            <!-- TikTok-style Action Buttons -->
-                            <div class="tiktok-actions">
-                                <div class="action-item">
-                                    <button class="tiktok-action-btn like-btn" data-website-url="${website.url}">
-                                        <img src="logo.png" alt="Like" class="like-logo">
-                                        <span class="count">${this.formatNumber(website.engagement.likes)}</span>
-                                    </button>
-                                </div>
-                                <div class="action-item">
-                                    <button class="tiktok-action-btn comment-btn" data-website-url="${website.url}">
-                                        <i class="far fa-comment"></i>
-                                        <span class="count">${this.formatNumber(website.engagement.comments)}</span>
-                                    </button>
-                                </div>
-                                <div class="action-item">
-                                    <button class="tiktok-action-btn share-btn" data-website-url="${website.url}">
-                                        <i class="fas fa-share"></i>
-                                        <span class="count">${this.formatNumber(website.engagement.shares)}</span>
-                                    </button>
-                                </div>
-                                <div class="action-item">
-                                    <button class="tiktok-action-btn bookmark-btn" data-website-url="${website.url}">
-                                        <i class="far fa-bookmark"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            
-                            <div class="iframe-preview">
-                                <div class="iframe-container">
-                                    <iframe 
-                                        src="${website.url}" 
-                                        frameborder="0"
-                                        loading="lazy"
-                                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                                        onload="this.parentElement.querySelector('.iframe-loading').style.display='none'"
-                                        onerror="this.parentElement.querySelector('.iframe-error').style.display='flex'">
-                                    </iframe>
-                                    <div class="iframe-loading">
-                                        <div class="loading-container">
-                                            <div class="loading-spinner">
-                                                <div class="loading-progress-ring"></div>
-                                            </div>
-                                            <div class="loading-progress-bar">
-                                                <div class="loading-progress-fill"></div>
-                                            </div>
-                                            <div class="loading-text">Loading preview</div>
-                                            <div class="loading-percentage">0%</div>
-                                            <div class="loading-dots">
-                                                <div class="loading-dot"></div>
-                                                <div class="loading-dot"></div>
-                                                <div class="loading-dot"></div>
-                                            </div>
-                                            <div class="loading-status">Connecting to website...</div>
+                        <div class="iframe-preview">
+                            <div class="iframe-container">
+                                <iframe 
+                                    src="${website.url}" 
+                                    frameborder="0"
+                                    loading="lazy"
+                                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                                    onload="this.parentElement.querySelector('.iframe-loading').style.display='none'"
+                                    onerror="this.parentElement.querySelector('.iframe-error').style.display='flex'">
+                                </iframe>
+                                <div class="iframe-loading">
+                                    <div class="loading-container">
+                                        <div class="loading-spinner">
+                                            <div class="loading-progress-ring"></div>
                                         </div>
+                                        <div class="loading-progress-bar">
+                                            <div class="loading-progress-fill"></div>
+                                        </div>
+                                        <div class="loading-text">Loading preview</div>
+                                        <div class="loading-percentage">0%</div>
+                                        <div class="loading-dots">
+                                            <div class="loading-dot"></div>
+                                            <div class="loading-dot"></div>
+                                            <div class="loading-dot"></div>
+                                        </div>
+                                        <div class="loading-status">Connecting to website...</div>
                                     </div>
-                                    <div class="iframe-error" style="display: none;">
+                                </div>
+                                <div class="iframe-error" style="display: none;">
                                         <i class="fas fa-external-link-alt"></i>
                                         <span>Website can be viewed with the external link</span>
                                     </div>
@@ -1394,229 +1394,10 @@ class TikTokFeed {
         }
     }
 
-    createAnimatedEffects(website) {
-        const category = website.category;
-        const theme = website.theme;
-        const title = website.title.toLowerCase();
-        
-        // Create animated effects around the real logo based on category
-        switch(category) {
-            case 'meme':
-                return this.createMemeEffects(title, theme);
-            case 'game':
-                return this.createGameEffects(title, theme);
-            case 'comedy':
-                return this.createComedyEffects(title, theme);
-            case 'social':
-                return this.createSocialEffects(title, theme);
-            case 'video':
-                return this.createVideoEffects(title, theme);
-            case 'tool':
-                return this.createToolEffects(title, theme);
-            case 'creative':
-                return this.createCreativeEffects(title, theme);
-            case 'educational':
-                return this.createEducationalEffects(title, theme);
-            case 'entertainment':
-                return this.createEntertainmentEffects(title, theme);
-            case 'user-uploaded':
-                return this.createUserEffects(title, theme);
-            case 'crypto':
-                return this.createCryptoEffects(title, theme);
-            default:
-                return this.createDefaultEffects(title, theme);
-        }
-    }
 
-    createMemeEffects(title, theme) {
-        return `
-            <div class="meme-effects">
-                <div class="sparkle sparkle-1">✨</div>
-                <div class="sparkle sparkle-2">⭐</div>
-                <div class="sparkle sparkle-3">💫</div>
-                <div class="meme-particles">
-                    <div class="particle particle-1">😂</div>
-                    <div class="particle particle-2">🤣</div>
-                    <div class="particle particle-3">🔥</div>
-                </div>
-            </div>
-        `;
-    }
 
-    createGameEffects(title, theme) {
-        return `
-            <div class="game-effects">
-                <div class="game-particles">
-                    <div class="particle particle-1">🎮</div>
-                    <div class="particle particle-2">🎯</div>
-                    <div class="particle particle-3">🏆</div>
-                </div>
-                <div class="game-energy">
-                    <div class="energy energy-1"></div>
-                    <div class="energy energy-2"></div>
-                </div>
-            </div>
-        `;
-    }
 
-    createComedyEffects(title, theme) {
-        return `
-            <div class="comedy-effects">
-                <div class="laugh-waves">
-                    <div class="wave wave-1">😂</div>
-                    <div class="wave wave-2">🤣</div>
-                </div>
-                <div class="comedy-sparkles">
-                    <div class="sparkle sparkle-1">✨</div>
-                    <div class="sparkle sparkle-2">⭐</div>
-                </div>
-            </div>
-        `;
-    }
 
-    createSocialEffects(title, theme) {
-        return `
-            <div class="social-effects">
-                <div class="connection-lines">
-                    <div class="line line-1"></div>
-                    <div class="line line-2"></div>
-                    <div class="line line-3"></div>
-                </div>
-                <div class="social-particles">
-                    <div class="particle particle-1">💬</div>
-                    <div class="particle particle-2">👥</div>
-                </div>
-            </div>
-        `;
-    }
-
-    createVideoEffects(title, theme) {
-        return `
-            <div class="video-effects">
-                <div class="play-button">▶️</div>
-                <div class="video-waves">
-                    <div class="wave wave-1"></div>
-                    <div class="wave wave-2"></div>
-                    <div class="wave wave-3"></div>
-                </div>
-                <div class="video-particles">
-                    <div class="particle particle-1">🎬</div>
-                    <div class="particle particle-2">📹</div>
-                </div>
-            </div>
-        `;
-    }
-
-    createToolEffects(title, theme) {
-        return `
-            <div class="tool-effects">
-                <div class="tool-sparks">
-                    <div class="spark spark-1">⚡</div>
-                    <div class="spark spark-2">💡</div>
-                </div>
-                <div class="tool-energy">
-                    <div class="energy energy-1"></div>
-                    <div class="energy energy-2"></div>
-                </div>
-            </div>
-        `;
-    }
-
-    createCreativeEffects(title, theme) {
-        return `
-            <div class="creative-effects">
-                <div class="paint-drops">
-                    <div class="drop drop-1">🎨</div>
-                    <div class="drop drop-2">🌈</div>
-                    <div class="drop drop-3">✨</div>
-                </div>
-                <div class="creative-sparkles">
-                    <div class="sparkle sparkle-1">✨</div>
-                    <div class="sparkle sparkle-2">💫</div>
-                </div>
-            </div>
-        `;
-    }
-
-    createEducationalEffects(title, theme) {
-        return `
-            <div class="educational-effects">
-                <div class="knowledge-particles">
-                    <div class="particle particle-1">💡</div>
-                    <div class="particle particle-2">📚</div>
-                    <div class="particle particle-3">🧠</div>
-                </div>
-                <div class="edu-sparkles">
-                    <div class="sparkle sparkle-1">✨</div>
-                    <div class="sparkle sparkle-2">⭐</div>
-                </div>
-            </div>
-        `;
-    }
-
-    createEntertainmentEffects(title, theme) {
-        return `
-            <div class="entertainment-effects">
-                <div class="entertainment-particles">
-                    <div class="particle particle-1">🎵</div>
-                    <div class="particle particle-2">🎭</div>
-                    <div class="particle particle-3">🎪</div>
-                </div>
-                <div class="entertainment-sparkles">
-                    <div class="sparkle sparkle-1">✨</div>
-                    <div class="sparkle sparkle-2">⭐</div>
-                </div>
-            </div>
-        `;
-    }
-
-    createUserEffects(title, theme) {
-        return `
-            <div class="user-effects">
-                <div class="user-badge">NEW</div>
-                <div class="user-sparkles">
-                    <div class="sparkle sparkle-1">✨</div>
-                    <div class="sparkle sparkle-2">⭐</div>
-                </div>
-                <div class="user-particles">
-                    <div class="particle particle-1">🚀</div>
-                    <div class="particle particle-2">💻</div>
-                </div>
-            </div>
-        `;
-    }
-
-    createCryptoEffects(title, theme) {
-        return `
-            <div class="crypto-effects">
-                <div class="crypto-particles">
-                    <div class="particle particle-1">💰</div>
-                    <div class="particle particle-2">🚀</div>
-                    <div class="particle particle-3">💎</div>
-                </div>
-                <div class="crypto-sparkles">
-                    <div class="sparkle sparkle-1">✨</div>
-                    <div class="sparkle sparkle-2">⭐</div>
-                </div>
-                <div class="crypto-energy">
-                    <div class="energy energy-1"></div>
-                    <div class="energy energy-2"></div>
-                </div>
-            </div>
-        `;
-    }
-
-    createDefaultEffects(title, theme) {
-        return `
-            <div class="default-effects">
-                <div class="default-pulse"></div>
-                <div class="default-sparkles">
-                    <div class="sparkle sparkle-1">✨</div>
-                    <div class="sparkle sparkle-2">⭐</div>
-                </div>
-            </div>
-        `;
-    }
 
     openWebsite(website) {
         this.currentWebsite = website;
@@ -2643,7 +2424,7 @@ class TikTokFeed {
     filterDiscoverContent() {
         const discoverGrid = document.getElementById('discoverGrid');
         if (!discoverGrid) return;
-
+        
         let filteredWebsites = this.websites;
 
         // Filter by category
@@ -2670,9 +2451,8 @@ class TikTokFeed {
                         <img src="${this.getFaviconUrl(website.url)}" alt="${website.title}" class="discover-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         <div class="discover-fallback" style="display: none;">
                             <img src="logo/ChatGPT Image Oct 6, 2025, 10_23_23 PM.png" alt="WeLike.fun Logo" class="animated-logo-fallback">
-                        </div>
                     </div>
-                    ${this.createAnimatedEffects(website)}
+                    </div>
                 </div>
                 <div class="discover-card-content">
                     <h3>${website.title}</h3>
