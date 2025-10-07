@@ -1201,12 +1201,18 @@ class TikTokFeed {
         card.className = 'video-card';
         card.style.zIndex = 3 - index;
         
+        // Add magical entrance animation (rotate between 6 styles)
+        const magicStyles = ['magic-slide', 'magic-flip', 'magic-zoom', 'magic-spiral', 'magic-bounce', 'magic-fade'];
+        const magicClass = magicStyles[index % magicStyles.length];
+        card.classList.add(magicClass);
+        
         // Add category-based styling
         card.classList.add(`theme-${website.theme}`);
         if (website.trending) card.classList.add('trending');
         
         card.innerHTML = `
             <div class="video-content">
+                <div class="sky ${this.getSkyClass(website)}"></div>
                 <div class="logo-background">
                     <img src="${this.getFaviconUrl(website.url)}" alt="${website.title}" class="background-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="background-fallback" style="display: none;">
@@ -1217,11 +1223,15 @@ class TikTokFeed {
                 <div class="content-overlay">
                     <div class="reel-card" data-url="${website.url}">
                         <div class="rc-media">
-                            <img class="rc-shot" src="${this.getScreenshotUrl(website.url)}" alt="${website.title}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="rc-fallback" style="display:none;">
-                                <img src="${this.getAltFaviconUrl(website.url)}" alt="${website.title} Favicon" class="alt-favicon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <div class="favicon-letter" style="display:none;">${this.getDomainInitial(website.url)}</div>
-                        </div>
+                            <div class="rc-favicon-display">
+                                <div class="favicon-container">
+                                    <img src="${this.getFaviconUrl(website.url)}" alt="${website.title}" class="main-favicon" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                    <div class="favicon-fallback-large" style="display:none;">
+                                        <img src="${this.getAltFaviconUrl(website.url)}" alt="${website.title}" class="alt-favicon-large" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                        <div class="favicon-letter-large" style="display:none;">${website.favicon || this.getDomainInitial(website.url)}</div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="rc-bubbles">
                                 <span class="bubble b1"></span>
                                 <span class="bubble b2"></span>
@@ -1241,50 +1251,66 @@ class TikTokFeed {
                         <div class="rc-bottom">
                             <h3 class="rc-title">${website.title}</h3>
                             <p class="rc-desc">${website.description}</p>
-                            <div class="rc-xp">
-                                <div class="bar"><span style="width:${this.getXpPercent(website)}%"></span></div>
-                                <div class="xp-label">Level ${this.getXpLevel(website)}</div>
+                            <div class="rc-stats">
+                                <div class="stat-item">
+                                    <div class="stat-icon">👁️</div>
+                                    <div class="stat-value" data-target="${website.engagement.views}">${this.formatNumber(website.engagement.views)}</div>
+                                    <div class="stat-label">Views</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-icon">⚡</div>
+                                    <div class="stat-value" data-target="${Math.floor(Math.random() * 100)}">${Math.floor(Math.random() * 100)}</div>
+                                    <div class="stat-label">Power</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-icon">🏆</div>
+                                    <div class="stat-value" data-target="${Math.floor(Math.random() * 100)}">${Math.floor(Math.random() * 100)}</div>
+                                    <div class="stat-label">Score</div>
+                                </div>
                             </div>
                             <div class="rc-cta-row">
                                 <button class="website-url-btn rc-cta" onclick="this.closest('.video-card').click()">Open</button>
                                 <span class="rc-chip">${this.getCleanUrl(website.url)}</span>
                         </div>
                     </div>
-                    
-                        <!-- Actions -->
-                        <div class="tiktok-actions rc-actions">
-                            <div class="action-item">
-                                <button class="tiktok-action-btn like-btn" data-website-url="${website.url}">
-                                    <img src="logo.png" alt="Like" class="like-logo">
-                                    <span class="count">${this.formatNumber(website.engagement.likes)}</span>
-                                </button>
-                            </div>
-                            <div class="action-item">
-                                <button class="tiktok-action-btn comment-btn" data-website-url="${website.url}">
-                                    <i class="far fa-comment"></i>
-                                    <span class="count">${this.formatNumber(website.engagement.comments)}</span>
-                                </button>
-                            </div>
-                            <div class="action-item">
-                                <button class="tiktok-action-btn share-btn" data-website-url="${website.url}">
-                                    <i class="fas fa-share"></i>
-                                    <span class="count">${this.formatNumber(website.engagement.shares)}</span>
-                                </button>
-                            </div>
-                            <div class="action-item">
-                                <button class="tiktok-action-btn bookmark-btn" data-website-url="${website.url}">
-                                    <i class="far fa-bookmark"></i>
-                                </button>
-                            </div>
-                        </div>
                 </div>
             </div>
         `;
         
+        // Create external action buttons
+        const actionsContainer = document.createElement('div');
+        actionsContainer.className = 'external-actions';
+        actionsContainer.innerHTML = `
+            <div class="action-item">
+                <button class="action-btn like-btn" data-website-url="${website.url}">
+                    <span class="heart-icon">❤️</span>
+                </button>
+                <span class="action-count">${this.formatNumber(website.engagement.likes)}</span>
+            </div>
+            <div class="action-item">
+                <button class="action-btn comment-btn" data-website-url="${website.url}">
+                    <i class="far fa-comment"></i>
+                </button>
+                <span class="action-count">${this.formatNumber(website.engagement.comments)}</span>
+            </div>
+            <div class="action-item">
+                <button class="action-btn share-btn" data-website-url="${website.url}">
+                    <i class="fas fa-share"></i>
+                </button>
+                <span class="action-count">${this.formatNumber(website.engagement.shares)}</span>
+            </div>
+            <div class="action-item">
+                <button class="action-btn bookmark-btn" data-website-url="${website.url}">
+                    <i class="far fa-bookmark"></i>
+                </button>
+            </div>
+        `;
+        card.appendChild(actionsContainer);
+        
         // Add click event
         card.addEventListener('click', (e) => {
             // Don't open website if clicking on action buttons only
-            if (!e.target.closest('.tiktok-actions')) {
+            if (!e.target.closest('.external-actions')) {
                 this.openWebsite(website);
             }
         });
@@ -1320,10 +1346,8 @@ class TikTokFeed {
             });
         }
 
-        // Add event listeners to individual reel action buttons
-        console.log('Card created for:', website.title);
-        console.log('TikTok actions div:', card.querySelector('.tiktok-actions'));
-        this.setupReelActionButtons(card, website);
+        // Add event listeners to external action buttons
+        this.setupExternalActionButtons(card, website);
         
         
         // Colored frames are disabled; do not add category-based frame classes
@@ -1373,6 +1397,48 @@ class TikTokFeed {
         } catch (e) {
             return '?';
         }
+    }
+
+    getSkyClass(website) {
+        const themeToSky = {
+            explosive: 'sky--dusk',
+            party: 'sky--tropical',
+            space: 'sky--dusk',
+            kids: 'sky--clear',
+            romance: 'sky--dawn',
+            professional: 'sky--clear',
+            artistic: 'sky--sunset',
+            ai: 'sky--meme',
+            humor: 'sky--meme',
+            connection: 'sky--dawn',
+            playful: 'sky--tropical',
+            random: 'sky--clear',
+            safe: 'sky--clear',
+            tech: 'sky--dusk',
+            stylish: 'sky--sunset',
+            indie: 'sky--sunset',
+            global: 'sky--dusk',
+            medical: 'sky--dusk',
+            mobile: 'sky--tropical',
+            user: 'sky--sunset'
+        };
+        const categoryToSky = {
+            meme: 'sky--meme',
+            games: 'sky--dusk',
+            game: 'sky--dusk',
+            social: 'sky--dawn',
+            text: 'sky--clear',
+            crypto: 'sky--sunset',
+            education: 'sky--clear',
+            developer: 'sky--dusk',
+            creative: 'sky--sunset',
+            art: 'sky--sunset',
+            video: 'sky--tropical',
+            business: 'sky--clear',
+            lifestyle: 'sky--dawn',
+            tools: 'sky--clear'
+        };
+        return themeToSky[website.theme] || categoryToSky[website.category] || 'sky--sunset';
     }
 
     getScreenshotUrl(url) {
@@ -1750,6 +1816,10 @@ class TikTokFeed {
             this.isTransitioning = false;
             this.videoFeed.classList.remove('fast-scroll');
             this.updateProgressDots();
+            
+            // Add shake effect when new card appears
+            this.videoFeed.classList.add('shake');
+            setTimeout(() => this.videoFeed.classList.remove('shake'), 400);
         }, 300);
     }
 
@@ -1775,6 +1845,10 @@ class TikTokFeed {
             this.isTransitioning = false;
             this.videoFeed.classList.remove('fast-scroll');
             this.updateProgressDots();
+            
+            // Add shake effect when new card appears
+            this.videoFeed.classList.add('shake');
+            setTimeout(() => this.videoFeed.classList.remove('shake'), 400);
         }, 300);
     }
 
@@ -1928,11 +2002,11 @@ class TikTokFeed {
         // Global action buttons removed - now using individual reel buttons
     }
 
-    setupReelActionButtons(card, website) {
-        const likeBtn = card.querySelector('.tiktok-action-btn.like-btn');
-        const commentBtn = card.querySelector('.tiktok-action-btn.comment-btn');
-        const shareBtn = card.querySelector('.tiktok-action-btn.share-btn');
-        const bookmarkBtn = card.querySelector('.tiktok-action-btn.bookmark-btn');
+    setupExternalActionButtons(card, website) {
+        const likeBtn = card.querySelector('.action-btn.like-btn');
+        const commentBtn = card.querySelector('.action-btn.comment-btn');
+        const shareBtn = card.querySelector('.action-btn.share-btn');
+        const bookmarkBtn = card.querySelector('.action-btn.bookmark-btn');
         
         console.log('Setting up reel action buttons for:', website.title);
         console.log('Found buttons:', { likeBtn, commentBtn, shareBtn, bookmarkBtn });
@@ -1977,8 +2051,8 @@ class TikTokFeed {
         }
 
         const isLiked = likeBtn.classList.contains('liked');
-        const countElement = likeBtn.querySelector('.count');
-        let currentCount = parseInt(countElement.textContent.replace(/[^\d]/g, '')) || 0;
+        const actionItem = likeBtn.closest('.action-item');
+        const countElement = actionItem ? actionItem.querySelector('.action-count') : null;
         
         try {
             const result = await this.supabaseService.toggleLike(this.currentUser.id, website.url);
@@ -1988,7 +2062,13 @@ class TikTokFeed {
                     // Like
                     likeBtn.classList.add('liked');
                     website.engagement.likes += 1;
-                    likeBtn.innerHTML = `<img src="logo.png" alt="Like" class="like-logo liked"><span class="count">${this.formatNumber(website.engagement.likes)}</span>`;
+                    if (countElement) {
+                        countElement.textContent = this.formatNumber(website.engagement.likes);
+                        countElement.style.animation = 'none';
+                        setTimeout(() => {
+                            countElement.style.animation = 'countPop 0.3s ease-out';
+                        }, 10);
+                    }
                     this.createLikeAnimation(card, true);
                     
                     // Update cache
@@ -1998,7 +2078,9 @@ class TikTokFeed {
                     // Unlike
                     likeBtn.classList.remove('liked');
                     website.engagement.likes -= 1;
-                    likeBtn.innerHTML = `<img src="logo.png" alt="Like" class="like-logo"><span class="count">${this.formatNumber(website.engagement.likes)}</span>`;
+                    if (countElement) {
+                        countElement.textContent = this.formatNumber(website.engagement.likes);
+                    }
                     this.createLikeAnimation(card, false);
                     
                     // Update cache
