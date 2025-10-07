@@ -737,7 +737,7 @@ body {
 }
 .rc-desc{ 
     color:#fff; 
-    font-size:18px; 
+    font-size:22px; 
     font-weight:600;
     line-height: 1.5;
     opacity: 0.95; 
@@ -1409,7 +1409,7 @@ body {
 @media (max-width: 768px){
   .reel-card{ max-width: 95%; }
   .rc-title{ font-size:24px !important; }
-  .rc-desc{ font-size:16px !important; }
+  .rc-desc{ font-size:20px !important; }
   .rc-bottom{ padding: 16px; gap: 12px; }
   
   .external-actions {
@@ -1481,7 +1481,7 @@ body {
 
 @media (max-width: 480px){
   .rc-title{ font-size:22px !important; }
-  .rc-desc{ font-size:15px !important; }
+  .rc-desc{ font-size:18px !important; }
   .rc-bottom{ padding: 14px; gap: 10px; }
   
   .external-actions {
@@ -4443,8 +4443,9 @@ body {
 
 .discover-card p {
     color: #ccc;
-    font-size: 14px;
+    font-size: 18px;
     margin-bottom: 15px;
+    line-height: 1.6;
 }
 
 /* Enhanced Discover Cards with Logos */
