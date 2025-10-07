@@ -81,6 +81,31 @@
                 <h2>Discover Fun Websites</h2>
                 <p>Explore trending and popular .fun websites</p>
             </div>
+            
+            <!-- Search Bar -->
+            <div class="discover-search">
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="discoverSearch" placeholder="Search websites, tags, or categories..." class="search-input">
+                    <button class="search-clear" id="searchClear" style="display: none;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Category Filter -->
+            <div class="discover-categories">
+                <button class="category-btn active" data-category="all">All</button>
+                <button class="category-btn" data-category="tools">🛠️ Tools</button>
+                <button class="category-btn" data-category="ai">🤖 AI</button>
+                <button class="category-btn" data-category="social">👥 Social</button>
+                <button class="category-btn" data-category="game">🎮 Games</button>
+                <button class="category-btn" data-category="text">📝 Text</button>
+                <button class="category-btn" data-category="mobile">📱 Mobile</button>
+                <button class="category-btn" data-category="crypto">🚀 Crypto</button>
+                <button class="category-btn" data-category="rental">🏄 Rental</button>
+            </div>
+            
             <div class="discover-grid" id="discoverGrid">
                 <!-- Discover content will be dynamically generated here -->
             </div>

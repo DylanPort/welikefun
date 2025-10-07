@@ -1008,6 +1008,10 @@ class TikTokFeed {
         this.lastScrollTime = 0;
         this.scrollDirection = 'down';
         this.isScrolling = false;
+        this.shuffledWebsites = [];
+        this.shuffleWebsites();
+        this.currentSearchTerm = '';
+        this.currentCategory = 'all';
 
         this.init();
     }
@@ -1020,6 +1024,14 @@ class TikTokFeed {
         this.setupEventListeners();
         this.setupActionButtons();
         this.hideLoading();
+    }
+
+    shuffleWebsites() {
+        this.shuffledWebsites = [...this.websites];
+        for (let i = this.shuffledWebsites.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [this.shuffledWebsites[i], this.shuffledWebsites[j]] = [this.shuffledWebsites[j], this.shuffledWebsites[i]];
+        }
     }
 
     setupElements() {
@@ -1168,9 +1180,9 @@ class TikTokFeed {
     renderFeed() {
         this.videoFeed.innerHTML = '';
         
-        // Create video cards for current and next items
-        for (let i = 0; i < Math.min(3, this.websites.length); i++) {
-            const website = this.websites[(this.currentIndex + i) % this.websites.length];
+        // Create video cards for current and next items using shuffled order
+        for (let i = 0; i < Math.min(3, this.shuffledWebsites.length); i++) {
+            const website = this.shuffledWebsites[(this.currentIndex + i) % this.shuffledWebsites.length];
             const card = this.createVideoCard(website, i);
             this.videoFeed.appendChild(card);
         }
@@ -1915,7 +1927,12 @@ class TikTokFeed {
         if (this.isTransitioning) return;
         
         this.isTransitioning = true;
-        this.currentIndex = (this.currentIndex + 1) % this.websites.length;
+        this.currentIndex = (this.currentIndex + 1) % this.shuffledWebsites.length;
+        
+        // Reshuffle when we reach the end
+        if (this.currentIndex === 0) {
+            this.shuffleWebsites();
+        }
         
         // Add scroll transition effect
         this.videoFeed.classList.add('fast-scroll');
@@ -1940,7 +1957,7 @@ class TikTokFeed {
         if (this.isTransitioning) return;
         
         this.isTransitioning = true;
-        this.currentIndex = (this.currentIndex - 1 + this.websites.length) % this.websites.length;
+        this.currentIndex = (this.currentIndex - 1 + this.shuffledWebsites.length) % this.shuffledWebsites.length;
         
         // Add scroll transition effect
         this.videoFeed.classList.add('fast-scroll');
@@ -2569,11 +2586,78 @@ class TikTokFeed {
     }
 
     loadDiscoverContent() {
+        this.setupDiscoverFilters();
+        this.filterDiscoverContent();
+    }
+
+    setupDiscoverFilters() {
+        const searchInput = document.getElementById('discoverSearch');
+        const searchClear = document.getElementById('searchClear');
+        const categoryBtns = document.querySelectorAll('.category-btn');
+
+        // Search functionality
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                this.currentSearchTerm = e.target.value.toLowerCase();
+                this.filterDiscoverContent();
+                
+                // Show/hide clear button
+                if (searchClear) {
+                    searchClear.style.display = e.target.value ? 'block' : 'none';
+                }
+            });
+        }
+
+        // Clear search
+        if (searchClear) {
+            searchClear.addEventListener('click', () => {
+                if (searchInput) {
+                    searchInput.value = '';
+                    this.currentSearchTerm = '';
+                    this.filterDiscoverContent();
+                    searchClear.style.display = 'none';
+                }
+            });
+        }
+
+        // Category filtering
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                this.currentCategory = btn.dataset.category;
+                this.filterDiscoverContent();
+            });
+        });
+    }
+
+    filterDiscoverContent() {
         const discoverGrid = document.getElementById('discoverGrid');
         if (!discoverGrid) return;
-        
-        // Show all websites with real logos and animated effects
-        discoverGrid.innerHTML = this.websites.map((website, index) => `
+
+        let filteredWebsites = this.websites;
+
+        // Filter by category
+        if (this.currentCategory && this.currentCategory !== 'all') {
+            filteredWebsites = filteredWebsites.filter(website => 
+                website.category === this.currentCategory
+            );
+        }
+
+        // Filter by search term
+        if (this.currentSearchTerm) {
+            filteredWebsites = filteredWebsites.filter(website => 
+                website.title.toLowerCase().includes(this.currentSearchTerm) ||
+                website.description.toLowerCase().includes(this.currentSearchTerm) ||
+                website.tags.some(tag => tag.toLowerCase().includes(this.currentSearchTerm))
+            );
+        }
+
+        // Show filtered websites
+        discoverGrid.innerHTML = filteredWebsites.map((website, index) => `
             <div class="discover-card" onclick="window.open('${website.url}', '_blank')">
                 <div class="discover-card-image">
                     <div class="discover-favicon">
