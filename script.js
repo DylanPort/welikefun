@@ -1206,87 +1206,79 @@ class TikTokFeed {
         if (website.trending) card.classList.add('trending');
         
         card.innerHTML = `
-            <div class="video-content">
-                <div class="blurred-background">
-                    <img src="${this.getFaviconUrl(website.url)}" alt="${website.title}" class="background-logo" onerror="this.style.display='none';">
-                </div>
-                <div class="content-layout">
-                    <div class="left-content">
-                        <div class="website-favicon ${website.category}-icon">
-                            <div class="animated-icon" data-category="${website.category}" data-theme="${website.theme}">
-                                <img src="${this.getFaviconUrl(website.url)}" alt="${website.title}" class="real-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <div class="favicon-fallback" style="display: none;">
-                                    <img src="logo/ChatGPT Image Oct 6, 2025, 10_23_23 PM.png" alt="WeLike.fun Logo" class="animated-logo-fallback">
+            <div class="video-content" style="background-image: url('${this.getFaviconUrl(website.url)}'), url('logo/ChatGPT Image Oct 6, 2025, 10_23_23 PM.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                <div class="content-overlay">
+                    <div class="content-layout">
+                        <div class="left-content">
+                            <div class="website-info">
+                                <h2 class="website-title">${website.title}</h2>
+                                <p class="website-description">${website.description}</p>
+                                <div class="tags">
+                                    ${website.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                                 </div>
-                                ${this.createAnimatedEffects(website)}
-                            </div>
-                        </div>
-                        <h2 class="website-title">${website.title}</h2>
-                        <p class="website-description">${website.description}</p>
-                        <div class="tags">
-                            ${website.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                        </div>
-                    </div>
-                    
-                    <div class="right-content">
-                        <!-- TikTok-style Action Buttons -->
-                        <div class="tiktok-actions">
-                            <div class="action-item">
-                                <button class="tiktok-action-btn like-btn" data-website-url="${website.url}">
-                                    <img src="logo.png" alt="Like" class="like-logo">
-                                    <span class="count">${this.formatNumber(website.engagement.likes)}</span>
-                                </button>
-                            </div>
-                            <div class="action-item">
-                                <button class="tiktok-action-btn comment-btn" data-website-url="${website.url}">
-                                    <i class="far fa-comment"></i>
-                                    <span class="count">${this.formatNumber(website.engagement.comments)}</span>
-                                </button>
-                            </div>
-                            <div class="action-item">
-                                <button class="tiktok-action-btn share-btn" data-website-url="${website.url}">
-                                    <i class="fas fa-share"></i>
-                                    <span class="count">${this.formatNumber(website.engagement.shares)}</span>
-                                </button>
-                            </div>
-                            <div class="action-item">
-                                <button class="tiktok-action-btn bookmark-btn" data-website-url="${website.url}">
-                                    <i class="far fa-bookmark"></i>
-                                </button>
                             </div>
                         </div>
                         
-                        <div class="iframe-preview">
-                            <div class="iframe-container">
-                                <iframe 
-                                    src="${website.url}" 
-                                    frameborder="0"
-                                    loading="lazy"
-                                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                                    onload="this.parentElement.querySelector('.iframe-loading').style.display='none'"
-                                    onerror="this.parentElement.querySelector('.iframe-error').style.display='flex'">
-                                </iframe>
-                                <div class="iframe-loading">
-                                    <div class="loading-container">
-                                        <div class="loading-spinner">
-                                            <div class="loading-progress-ring"></div>
-                                        </div>
-                                        <div class="loading-progress-bar">
-                                            <div class="loading-progress-fill"></div>
-                                        </div>
-                                        <div class="loading-text">Loading preview</div>
-                                        <div class="loading-percentage">0%</div>
-                                        <div class="loading-dots">
-                                            <div class="loading-dot"></div>
-                                            <div class="loading-dot"></div>
-                                            <div class="loading-dot"></div>
-                                        </div>
-                                        <div class="loading-status">Connecting to website...</div>
-                                    </div>
+                        <div class="right-content">
+                            <!-- TikTok-style Action Buttons -->
+                            <div class="tiktok-actions">
+                                <div class="action-item">
+                                    <button class="tiktok-action-btn like-btn" data-website-url="${website.url}">
+                                        <img src="logo.png" alt="Like" class="like-logo">
+                                        <span class="count">${this.formatNumber(website.engagement.likes)}</span>
+                                    </button>
                                 </div>
-                                <div class="iframe-error" style="display: none;">
-                                    <i class="fas fa-external-link-alt"></i>
-                                    <span>Website can be viewed with the external link</span>
+                                <div class="action-item">
+                                    <button class="tiktok-action-btn comment-btn" data-website-url="${website.url}">
+                                        <i class="far fa-comment"></i>
+                                        <span class="count">${this.formatNumber(website.engagement.comments)}</span>
+                                    </button>
+                                </div>
+                                <div class="action-item">
+                                    <button class="tiktok-action-btn share-btn" data-website-url="${website.url}">
+                                        <i class="fas fa-share"></i>
+                                        <span class="count">${this.formatNumber(website.engagement.shares)}</span>
+                                    </button>
+                                </div>
+                                <div class="action-item">
+                                    <button class="tiktok-action-btn bookmark-btn" data-website-url="${website.url}">
+                                        <i class="far fa-bookmark"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="iframe-preview">
+                                <div class="iframe-container">
+                                    <iframe 
+                                        src="${website.url}" 
+                                        frameborder="0"
+                                        loading="lazy"
+                                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                                        onload="this.parentElement.querySelector('.iframe-loading').style.display='none'"
+                                        onerror="this.parentElement.querySelector('.iframe-error').style.display='flex'">
+                                    </iframe>
+                                    <div class="iframe-loading">
+                                        <div class="loading-container">
+                                            <div class="loading-spinner">
+                                                <div class="loading-progress-ring"></div>
+                                            </div>
+                                            <div class="loading-progress-bar">
+                                                <div class="loading-progress-fill"></div>
+                                            </div>
+                                            <div class="loading-text">Loading preview</div>
+                                            <div class="loading-percentage">0%</div>
+                                            <div class="loading-dots">
+                                                <div class="loading-dot"></div>
+                                                <div class="loading-dot"></div>
+                                                <div class="loading-dot"></div>
+                                            </div>
+                                            <div class="loading-status">Connecting to website...</div>
+                                        </div>
+                                    </div>
+                                    <div class="iframe-error" style="display: none;">
+                                        <i class="fas fa-external-link-alt"></i>
+                                        <span>Website can be viewed with the external link</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

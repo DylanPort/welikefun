@@ -187,6 +187,27 @@ body {
     overflow: hidden;
 }
 
+/* Content Overlay for Background Logo */
+.content-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.7) 0%,
+        rgba(0, 0, 0, 0.5) 50%,
+        rgba(0, 0, 0, 0.8) 100%
+    );
+    backdrop-filter: blur(1px);
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+}
+
 .video-card.active {
     opacity: 1;
     transform: translateY(0);
@@ -253,6 +274,17 @@ body {
     text-align: center;
     position: relative;
     z-index: 10;
+}
+
+/* Website Info */
+.website-info {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    max-width: 400px;
 }
 
 .right-content {
