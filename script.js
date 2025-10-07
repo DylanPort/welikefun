@@ -1217,7 +1217,7 @@ class TikTokFeed {
                 <div class="content-layout">
                     <div class="left-content">
                             <div class="website-link">
-                                <a href="${website.url}" target="_blank" class="website-url-btn">${this.getCleanUrl(website.url)}</a>
+                                <button class="website-url-btn" onclick="this.closest('.video-card').click()">${this.getCleanUrl(website.url)}</button>
                             </div>
                             <div class="website-description">
                                 <p>${website.description}</p>
@@ -1294,8 +1294,8 @@ class TikTokFeed {
         
         // Add click event
         card.addEventListener('click', (e) => {
-            // Don't open website if clicking on iframe, controls, or action buttons
-            if (!e.target.closest('.iframe-preview') && !e.target.closest('.reel-actions')) {
+            // Don't open website if clicking on action buttons only
+            if (!e.target.closest('.tiktok-actions')) {
                 this.openWebsite(website);
             }
         });

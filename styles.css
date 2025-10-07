@@ -445,7 +445,6 @@ body {
     transform-origin: top left;
     width: 200%;
     height: 200%;
-    pointer-events: none;
 }
 
 .iframe-loading {
@@ -655,7 +654,6 @@ body {
         transform: scale(0.5);
         width: 200%;
         height: 200%;
-        pointer-events: none;
     }
     
     /* Ensure loading animation fits in mobile iframe */
@@ -760,7 +758,6 @@ body {
         transform: scale(0.4);
         width: 250%;
         height: 250%;
-        pointer-events: none;
     }
     
     /* Ensure loading animation fits in extra small mobile iframe */
@@ -1321,149 +1318,6 @@ body {
 }
 
 /* Theme-based styling */
-.theme-vibrant .website-favicon {
-    background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
-}
-
-.theme-creative .website-favicon {
-    background: linear-gradient(135deg, #a8edea, #fed6e3);
-}
-
-.theme-humor .website-favicon {
-    background: linear-gradient(135deg, #ffd89b, #19547b);
-}
-
-.theme-connection .website-favicon {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-}
-
-.theme-playful .website-favicon {
-    background: linear-gradient(135deg, #f093fb, #f5576c);
-}
-
-.theme-entertainment .website-favicon {
-    background: linear-gradient(135deg, #4facfe, #00f2fe);
-}
-
-.theme-professional .website-favicon {
-    background: linear-gradient(135deg, #43e97b, #38f9d7);
-}
-
-.theme-party .website-favicon {
-    background: linear-gradient(135deg, #fa709a, #fee140);
-}
-
-.theme-wild .website-favicon {
-    background: linear-gradient(135deg, #ff9a9e, #fecfef);
-}
-
-.theme-learning .website-favicon {
-    background: linear-gradient(135deg, #a8c0ff, #3f2b96);
-}
-
-.theme-tech .website-favicon {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-}
-
-.theme-audio .website-favicon {
-    background: linear-gradient(135deg, #f093fb, #f5576c);
-}
-
-.theme-random .website-favicon {
-    background: linear-gradient(135deg, #4facfe, #00f2fe);
-}
-
-.theme-safe .website-favicon {
-    background: linear-gradient(135deg, #43e97b, #38f9d7);
-}
-
-.theme-fast .website-favicon {
-    background: linear-gradient(135deg, #fa709a, #fee140);
-}
-
-.theme-romance .website-favicon {
-    background: linear-gradient(135deg, #ff9a9e, #fecfef);
-}
-
-.theme-artistic .website-favicon {
-    background: linear-gradient(135deg, #a8c0ff, #3f2b96);
-}
-
-.theme-utility .website-favicon {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-}
-
-.theme-stylish .website-favicon {
-    background: linear-gradient(135deg, #f093fb, #f5576c);
-}
-
-.theme-musical .website-favicon {
-    background: linear-gradient(135deg, #4facfe, #00f2fe);
-}
-
-.theme-indie .website-favicon {
-    background: linear-gradient(135deg, #43e97b, #38f9d7);
-}
-
-.theme-personal .website-favicon {
-    background: linear-gradient(135deg, #fa709a, #fee140);
-}
-
-.theme-medical .website-favicon {
-    background: linear-gradient(135deg, #ff9a9e, #fecfef);
-}
-
-.theme-space .website-favicon {
-    background: linear-gradient(135deg, #a8c0ff, #3f2b96);
-}
-
-.theme-kids .website-favicon {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-}
-
-.theme-mobile .website-favicon {
-    background: linear-gradient(135deg, #f093fb, #f5576c);
-}
-
-.theme-puzzle .website-favicon {
-    background: linear-gradient(135deg, #4facfe, #00f2fe);
-}
-
-.theme-parody .website-favicon {
-    background: linear-gradient(135deg, #43e97b, #38f9d7);
-}
-
-.theme-explosive .website-favicon {
-    background: linear-gradient(135deg, #fa709a, #fee140);
-}
-
-.theme-global .website-favicon {
-    background: linear-gradient(135deg, #ff9a9e, #fecfef);
-}
-
-.theme-tropical .website-favicon {
-    background: linear-gradient(135deg, #a8c0ff, #3f2b96);
-}
-
-.theme-ai .website-favicon {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-}
-
-.theme-retro .website-favicon {
-    background: linear-gradient(135deg, #f093fb, #f5576c);
-}
-
-.theme-legal .website-favicon {
-    background: linear-gradient(135deg, #4facfe, #00f2fe);
-}
-
-.theme-board .website-favicon {
-    background: linear-gradient(135deg, #43e97b, #38f9d7);
-}
-
-.theme-carnival .website-favicon {
-    background: linear-gradient(135deg, #fa709a, #fee140);
-}
 
 /* Trending indicator */
 .trending::before {
