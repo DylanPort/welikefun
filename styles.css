@@ -714,6 +714,22 @@ body {
     }
 }
 
+/*
+   Disable all legacy colored frame styles around reels
+   This neutralizes any class ending with or containing "-frame"
+   and hides their decorative pseudo-elements (yellow bubbles, etc.)
+*/
+[class*='-frame'] {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+[class*='-frame']::before,
+[class*='-frame']::after {
+    display: none !important;
+    content: none !important;
+}
+
 @media (max-width: 480px) {
     .video-content {
         padding: 0 10px;
@@ -902,11 +918,7 @@ body {
 /* Static visual effects - no animations */
 
 /* Category-specific static frames */
-.meme-frame {
-    border: 3px solid #ff6b6b;
-    box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
-    position: relative;
-}
+.meme-frame { position: static; border: none; box-shadow: none; }
 
 .meme-frame::before {
     content: '';
@@ -924,11 +936,7 @@ body {
     z-index: 10;
 }
 
-.game-frame {
-    border: 3px solid #4ecdc4;
-    box-shadow: 0 0 20px rgba(78, 205, 196, 0.3);
-    position: relative;
-}
+.game-frame { position: static; border: none; box-shadow: none; }
 
 .game-frame::before {
     content: '';
@@ -946,11 +954,7 @@ body {
     z-index: 10;
 }
 
-.comedy-frame {
-    border: 3px solid #ffd93d;
-    box-shadow: 0 0 20px rgba(255, 217, 61, 0.3);
-    position: relative;
-}
+.comedy-frame { position: static; border: none; box-shadow: none; }
 
 .comedy-frame::before {
     content: '';
@@ -968,11 +972,7 @@ body {
     z-index: 10;
 }
 
-.social-frame {
-    border: 3px solid #fe2c55;
-    box-shadow: 0 0 20px rgba(254, 44, 85, 0.3);
-    position: relative;
-}
+.social-frame { position: static; border: none; box-shadow: none; }
 
 .social-frame::before {
     content: '';
@@ -990,11 +990,7 @@ body {
     z-index: 10;
 }
 
-.video-frame {
-    border: 3px solid #25f4ee;
-    box-shadow: 0 0 20px rgba(37, 244, 238, 0.3);
-    position: relative;
-}
+.video-frame { position: static; border: none; box-shadow: none; }
 
 .video-frame::before {
     content: '';
@@ -1012,11 +1008,7 @@ body {
     z-index: 10;
 }
 
-.tools-frame {
-    border: 3px solid #a8edea;
-    box-shadow: 0 0 20px rgba(168, 237, 234, 0.3);
-    position: relative;
-}
+.tools-frame { position: static; border: none; box-shadow: none; }
 
 .tools-frame::before {
     content: '';
@@ -1034,11 +1026,7 @@ body {
     z-index: 10;
 }
 
-.education-frame {
-    border: 3px solid #667eea;
-    box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
-    position: relative;
-}
+.education-frame { position: static; border: none; box-shadow: none; }
 
 .education-frame::before {
     content: '';
@@ -1056,11 +1044,7 @@ body {
     z-index: 10;
 }
 
-.business-frame {
-    border: 3px solid #43e97b;
-    box-shadow: 0 0 20px rgba(67, 233, 123, 0.3);
-    position: relative;
-}
+.business-frame { position: static; border: none; box-shadow: none; }
 
 .business-frame::before {
     content: '';

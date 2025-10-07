@@ -1306,8 +1306,7 @@ class TikTokFeed {
         this.setupReelActionButtons(card, website);
         
         
-        // Add unique animations based on category
-        this.addCategoryAnimations(card, website);
+        // Colored frames are disabled; do not add category-based frame classes
         
         return card;
     }
@@ -1322,56 +1321,8 @@ class TikTokFeed {
     }
 
     addCategoryAnimations(card, website) {
-        // Add unique static visual effects based on category
-        switch(website.category) {
-            case 'meme':
-                card.classList.add('meme-frame');
-                break;
-            case 'games':
-                card.classList.add('game-frame');
-                break;
-            case 'comedy':
-                card.classList.add('comedy-frame');
-                break;
-            case 'social':
-                card.classList.add('social-frame');
-                break;
-            case 'video':
-                card.classList.add('video-frame');
-                break;
-            case 'tools':
-                card.classList.add('tools-frame');
-                break;
-            case 'education':
-                card.classList.add('education-frame');
-                break;
-            case 'business':
-                card.classList.add('business-frame');
-                break;
-            case 'creative':
-                card.classList.add('creative-frame');
-                break;
-            case 'lifestyle':
-                card.classList.add('lifestyle-frame');
-                break;
-            case 'developer':
-                card.classList.add('developer-frame');
-                break;
-            case 'art':
-                card.classList.add('art-frame');
-                break;
-            case 'entertainment':
-                card.classList.add('entertainment-frame');
-                break;
-            case 'community':
-                card.classList.add('community-frame');
-                break;
-            case 'crypto':
-                card.classList.add('crypto-frame');
-                break;
-            default:
-                card.classList.add('default-frame');
-        }
+        // Intentionally left empty to disable colored frames around reels
+        return;
     }
 
     getFaviconUrl(url) {
