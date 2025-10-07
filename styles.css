@@ -317,15 +317,36 @@ body {
     z-index: 10;
 }
 
-/* Website Info */
-.website-info {
-    background: rgba(0, 0, 0, 0.6);
-    padding: 20px;
-    border-radius: 15px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    width: 100%;
+/* Website Link */
+.website-link {
+    margin-bottom: 15px;
+}
+
+.website-url {
+    color: #25f4ee;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    word-break: break-all;
+    transition: all 0.3s ease;
+}
+
+.website-url:hover {
+    color: #fe2c55;
+    text-shadow: 0 0 10px rgba(37, 244, 238, 0.5);
+}
+
+/* Website Description */
+.website-description {
     max-width: 400px;
+}
+
+.website-description p {
+    color: #fff;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 .right-content {
@@ -398,7 +419,7 @@ body {
 .iframe-container {
     position: relative;
     width: 100%;
-    height: 600px;
+    height: 750px;
     background: #fff;
     overflow: hidden;
 }
@@ -610,8 +631,8 @@ body {
     }
     
     .iframe-container {
-        height: 400px;
-        min-height: 380px;
+        height: 500px;
+        min-height: 480px;
     }
     
     .iframe-container iframe {
@@ -623,13 +644,15 @@ body {
     /* Ensure loading animation fits in mobile iframe */
     .iframe-loading {
         padding: 10px;
-        min-height: 380px;
+        min-height: 480px;
     }
     
-    .website-favicon {
-        width: 70px;
-        height: 70px;
-        margin-bottom: 12px;
+    .website-url {
+        font-size: 14px;
+    }
+    
+    .website-description p {
+        font-size: 13px;
     }
     
     .website-title {
@@ -711,8 +734,8 @@ body {
     }
     
     .iframe-container {
-        height: 350px;
-        min-height: 330px;
+        height: 450px;
+        min-height: 430px;
     }
     
     .iframe-container iframe {
@@ -724,7 +747,15 @@ body {
     /* Ensure loading animation fits in extra small mobile iframe */
     .iframe-loading {
         padding: 8px;
-        min-height: 330px;
+        min-height: 430px;
+    }
+    
+    .website-url {
+        font-size: 12px;
+    }
+    
+    .website-description p {
+        font-size: 12px;
     }
     
     .iframe-header {

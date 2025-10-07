@@ -1216,12 +1216,11 @@ class TikTokFeed {
                 <div class="content-overlay">
                     <div class="content-layout">
                         <div class="left-content">
-                            <div class="website-info">
-                                <h2 class="website-title">${website.title}</h2>
-                                <p class="website-description">${website.description}</p>
-                                <div class="tags">
-                                    ${website.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                                </div>
+                            <div class="website-link">
+                                <a href="${website.url}" target="_blank" class="website-url">${website.url}</a>
+                            </div>
+                            <div class="website-description">
+                                <p>${website.description}</p>
                             </div>
                         </div>
                         
