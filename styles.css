@@ -317,23 +317,32 @@ body {
     z-index: 10;
 }
 
-/* Website Link */
+/* Website Link Button */
 .website-link {
     margin-bottom: 15px;
 }
 
-.website-url {
-    color: #25f4ee;
+.website-url-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #fe2c55, #25f4ee);
+    color: #000;
     text-decoration: none;
     font-size: 16px;
-    font-weight: 600;
-    word-break: break-all;
+    font-weight: 700;
+    padding: 12px 24px;
+    border-radius: 25px;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(37, 244, 238, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: none;
+    cursor: pointer;
 }
 
-.website-url:hover {
-    color: #fe2c55;
-    text-shadow: 0 0 10px rgba(37, 244, 238, 0.5);
+.website-url-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 244, 238, 0.5);
+    background: linear-gradient(135deg, #25f4ee, #fe2c55);
 }
 
 /* Website Description */
@@ -432,6 +441,7 @@ body {
     transform-origin: top left;
     width: 200%;
     height: 200%;
+    pointer-events: none;
 }
 
 .iframe-loading {
@@ -639,6 +649,7 @@ body {
         transform: scale(0.5);
         width: 200%;
         height: 200%;
+        pointer-events: none;
     }
     
     /* Ensure loading animation fits in mobile iframe */
@@ -647,8 +658,9 @@ body {
         min-height: 480px;
     }
     
-    .website-url {
+    .website-url-btn {
         font-size: 14px;
+        padding: 10px 20px;
     }
     
     .website-description p {
@@ -742,6 +754,7 @@ body {
         transform: scale(0.4);
         width: 250%;
         height: 250%;
+        pointer-events: none;
     }
     
     /* Ensure loading animation fits in extra small mobile iframe */
@@ -750,8 +763,9 @@ body {
         min-height: 430px;
     }
     
-    .website-url {
+    .website-url-btn {
         font-size: 12px;
+        padding: 8px 16px;
     }
     
     .website-description p {

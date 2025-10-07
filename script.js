@@ -1217,7 +1217,7 @@ class TikTokFeed {
                     <div class="content-layout">
                         <div class="left-content">
                             <div class="website-link">
-                                <a href="${website.url}" target="_blank" class="website-url">${website.url}</a>
+                                <a href="${website.url}" target="_blank" class="website-url-btn">${this.getCleanUrl(website.url)}</a>
                             </div>
                             <div class="website-description">
                                 <p>${website.description}</p>
@@ -1382,6 +1382,15 @@ class TikTokFeed {
         } catch (error) {
             // Fallback to a generic favicon service
             return `https://favicons.githubusercontent.com/${url}`;
+        }
+    }
+
+    getCleanUrl(url) {
+        try {
+            const urlObj = new URL(url);
+            return urlObj.hostname.replace('www.', '');
+        } catch (error) {
+            return url.replace(/^https?:\/\//, '').replace(/^www\./, '');
         }
     }
 
